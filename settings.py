@@ -56,5 +56,6 @@ TOTAL_DECIMALS = 18  # количество знаков после запято
 
 CLASSIC_ROUTES_MODULES_USING = [
     # ['bullas_purchase_upgrade_for_moola'],   
-    ['bullas_claim_free_gamepass_for_main_bullas_nft'],
+    # ['bullas_claim_free_gamepass_for_main_bullas_nft'],
+    ['bullas_make_first_click_only_once_for_start_mining_moola'],
 ]

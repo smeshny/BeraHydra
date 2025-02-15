@@ -68,3 +68,7 @@ async def bullas_purchase_upgrade_for_moola(module_input_data):
 async def bullas_claim_free_gamepass_for_main_bullas_nft(module_input_data):
     worker = Bullas(get_client(module_input_data))
     return await worker.claim_free_gamepass_for_main_bullas_nft()
+
+async def bullas_make_first_click_only_once_for_start_mining_moola(module_input_data):
+    worker = Bullas(get_client(module_input_data))
+    return await worker.make_first_click_only_once_for_start_mining_moola()

@@ -173,5 +173,6 @@ logs/
 .DS_Store
 accounts_data_my.xlsx
 accounts_data_my copy.xlsx
+accounts_data_my_bullas.xlsx
 data/services/*
 accounts_stats/

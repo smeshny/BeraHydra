@@ -19,6 +19,7 @@ AVAILABLE_MODULES_INFO = {
     transfer_eth                        : (transfer_eth, 3, 'Transfer $ETH', 0, [0]),
     bullas_purchase_upgrade_for_moola   : (bullas_purchase_upgrade_for_moola, 3, 'Bullas Purchase Upgrade for Moola', 0, [0]),
     bullas_claim_free_gamepass_for_main_bullas_nft : (bullas_claim_free_gamepass_for_main_bullas_nft, 3, 'Bullas Claim Free Gamepass for Main Bullas NFT', 0, [0]),
+    bullas_make_first_click_only_once_for_start_mining_moola : (bullas_make_first_click_only_once_for_start_mining_moola, 3, 'Bullas Make First Click Only Once for Start Mining Moola', 0, [0]),
 }
 
 
