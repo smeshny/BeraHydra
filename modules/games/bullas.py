@@ -98,8 +98,8 @@ class Bullas(Logger, RequestClient):
             else:
                 raise error
             
-    async def get_power_of_nft_id(self, nft_id: int):
-        power_wei = await self.queue_plugin_contract.functions.getPower(nft_id).call()
+    async def get_power_of_nft_id(self, gamepass_id: int):
+        power_wei = await self.queue_plugin_contract.functions.getPower(gamepass_id).call()
         power_ether = self.client.from_wei(power_wei)
         return power_ether
 
@@ -140,5 +140,62 @@ class Bullas(Logger, RequestClient):
 
     @helper
     async def purchase_upgrade_for_moola(self):
-        print(await self.check_if_main_bullas_nft_is_not_used())
-        pass
+        gamepass_id = await self.get_game_pass_id()        
+        gamepass_power = await self.get_power_of_nft_id(gamepass_id)
+        
+        tool_ids = list(range(20))
+        tools_stats = {}
+        purchases = 0
+        
+        for tool_id in tool_ids:
+            tool_quantity = await self.factory_contract.functions.tokenId_toolId_Amount(gamepass_id, tool_id).call()
+            tools_stats[tool_id] = tool_quantity
+            
+            if tool_quantity < random.randint(1, 1):
+                try:
+                    tool_amount = random.randint(1, 1)
+                    self.logger_msg(*self.client.acc_info,
+                            msg=f'Start purchase {tool_amount} tools for Tool ID: {tool_id}. Tools quantity before: {tools_stats[tool_id]}'
+                            )
+                    transaction = await self.factory_contract.functions.purchaseTool(
+                        gamepass_id,
+                        tool_id,
+                        tool_amount,
+                        ).build_transaction(await self.client.prepare_transaction())
+                    await self.client.send_transaction(transaction)
+                    tools_stats[tool_id] = tool_quantity + tool_amount
+                    purchases += 1
+                    
+                except Exception as error:
+                    if 'burn amount exceeds balance' in str(error):
+                        self.logger_msg(*self.client.acc_info,
+                            msg=f'Not enough MOOLA to purchase Tool ID: {tool_id}',
+                            type_msg='warning'
+                            )
+                        break
+                    else:
+                        raise SoftwareException(f"Error purchasing tool: {error}")
+        
+        if purchases == 0:
+            self.logger_msg(*self.client.acc_info,
+                    msg=f'Start claim MOOLA for game pass {gamepass_id} because nothig purchased',
+                    type_msg='info'
+                    )
+            try:
+                transaction = await self.factory_contract.functions.claim(
+                    gamepass_id,
+                    ).build_transaction(await self.client.prepare_transaction())
+                await self.client.send_transaction(transaction)
+            except Exception as error:
+                raise SoftwareException(f"Error claiming MOOLA: {error}")
+        
+        self.logger_msg(*self.client.acc_info,
+                msg=f'Tool stats: {tools_stats}',
+                type_msg='info'
+                )
+        self.logger_msg(*self.client.acc_info,
+                msg=f'Game pass power: {gamepass_power}',
+                type_msg='info'
+                )
+        
+        return True
