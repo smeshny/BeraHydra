@@ -169,3 +169,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+logs/
+.DS_Store
+accounts_data_my.xlsx
+accounts_data_my copy.xlsx
+data/services/*
+accounts_stats/
