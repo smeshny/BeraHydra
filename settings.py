@@ -45,98 +45,15 @@ TRANSFER_ETH_AMOUNT = ['100', '100']  # сумма трансфера ETH на �
 TOTAL_DECIMALS = 18  # количество знаков после запятой для всех транзакций
 
 
-
-#####################################################  HYPURRFI #######################################################
-# https://app.hypurr.fi/dashboard
-# Deposit settings
-HYPURR_DEPOSIT_AMOUNT_USDC = ('70', '100')
-HYPURR_DEPOSIT_AMOUNT_sUSDe = ('70', '100')
-HYPURR_DEPOSIT_AMOUNT_SolvBTC = ('70', '100')
-# Borrow settings
-HYPURR_BORROW_HEALTH_FACTOR_MIN = 5 # minimum health factor, if less, the borrow will be skipped
-HYPURR_BORROW_AMOUNT_FROM_AVAILABLE = ('5', '20')
+#####################################################  BULLAS #######################################################
+# https://game.bullas.xyz/
 
 #ROUTES MODULES:
-    # ['claim_tokens_on_hypurr:HyperTestnet'],   
+    # ['purchase_upgrade_for_moola:Berachain'],   
     
-    # ['borrow_whype_from_hupurr:HyperTestnet'],
-    # ['borrow_usdxl_from_hupurr:HyperTestnet'],
-    # ['borrow_usdc_from_hupurr:HyperTestnet'],
-    # ['borrow_susde_from_hupurr:HyperTestnet'],
-    # ['borrow_solvbtc_from_hupurr:HyperTestnet'],
-    
-    # ['deposit_usdc_to_hypurr:HyperTestnet'],
-    # ['deposit_susde_to_hypurr:HyperTestnet'],
-    # ['deposit_solvbtc_to_hypurr:HyperTestnet'],
 #######################################################################################################################
 
-####################################################  HYPERLEND #######################################################
-# https://testnet.hyperlend.finance/dashboard
-
-#ROUTES MODULES:
-    # ['claim_hype_on_hyperlend_once:HyperTestnet'],
-    # ['claim_MBTC_on_hyperlend_once:HyperTestnet'],
-
-############################################  Hyperliquid Exchange testnet ############################################
-USDC_AMOUNT_TO_TRANSFER_FROM_HL_TO_EVM = ('5', '20') # amount of USDC to transfer from HL exchange to HL EVM
-USDC_AMOUNT_TO_OPEN_RANDOM_PERP_POSITION = ('3', '12') # amount of USDC to open random perp position
-
-#ROUTES MODULES:
-    # ['claim_usdc_from_hl_exchange_testnet_once:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['close_random_perp_position_on_hl:HyperTestnet'],
-    # ['close_all_perp_positions_on_hl:HyperTestnet'],
-
-    
-
-#######################################################################################################################
 
 CLASSIC_ROUTES_MODULES_USING = [
-    ######################### HYPERLIQUID EXCHANGE TESTNET ###########################
-    # ['claim_usdc_from_hl_exchange_testnet_once:HyperTestnet'],
-    
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['open_random_perp_position_on_hl:HyperTestnet'],
-    # ['close_all_perp_positions_on_hl:HyperTestnet'],
-    # ['close_random_perp_position_on_hl:HyperTestnet'],
-    # ['close_random_perp_position_on_hl:HyperTestnet'],
-    # ['close_random_perp_position_on_hl:HyperTestnet'],
-    
-    
-    ######################### EVM ###########################
-    # ['claim_hype_on_hyperlend_once:HyperTestnet'],
-    # ['claim_MBTC_on_hyperlend_once:HyperTestnet'],
-    
-    # ['claim_tokens_on_hypurr:HyperTestnet'],
-    
-    # ['deposit_usdc_to_hypurr:HyperTestnet', 'deposit_susde_to_hypurr:HyperTestnet', 'deposit_solvbtc_to_hypurr:HyperTestnet', None,],
-    # ['deposit_usdc_to_hypurr:HyperTestnet', 'deposit_susde_to_hypurr:HyperTestnet', 'deposit_solvbtc_to_hypurr:HyperTestnet', None,],
-    # ['deposit_usdc_to_hypurr:HyperTestnet', 'deposit_susde_to_hypurr:HyperTestnet', 'deposit_solvbtc_to_hypurr:HyperTestnet', None,],
-    
-    # ['borrow_whype_from_hupurr:HyperTestnet', 'borrow_usdxl_from_hupurr:HyperTestnet', 'borrow_usdc_from_hupurr:HyperTestnet', 'borrow_susde_from_hupurr:HyperTestnet', 'borrow_solvbtc_from_hupurr:HyperTestnet', None,None,],
-    # ['borrow_whype_from_hupurr:HyperTestnet', 'borrow_usdxl_from_hupurr:HyperTestnet', 'borrow_usdc_from_hupurr:HyperTestnet', 'borrow_susde_from_hupurr:HyperTestnet', 'borrow_solvbtc_from_hupurr:HyperTestnet', None,None,],
-    # ['borrow_whype_from_hupurr:HyperTestnet', 'borrow_usdxl_from_hupurr:HyperTestnet', 'borrow_usdc_from_hupurr:HyperTestnet', 'borrow_susde_from_hupurr:HyperTestnet', 'borrow_solvbtc_from_hupurr:HyperTestnet', None,None,],
-    
-    
-    # ['claim_tokens_on_hypurr:HyperTestnet'],   
-    
-    # ['borrow_whype_from_hupurr:HyperTestnet'],
-    # ['borrow_usdxl_from_hupurr:HyperTestnet'],
-    # ['borrow_usdc_from_hupurr:HyperTestnet'],
-    # ['borrow_susde_from_hupurr:HyperTestnet'],
-    # ['borrow_solvbtc_from_hupurr:HyperTestnet'],
-    
-    # ['deposit_usdc_to_hypurr:HyperTestnet'],
-    # ['deposit_susde_to_hypurr:HyperTestnet'],
-    # ['deposit_solvbtc_to_hypurr:HyperTestnet'],
+    ['purchase_upgrade_for_moola:Berachain'],   
 ]

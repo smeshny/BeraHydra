@@ -64,7 +64,7 @@ NFTS_PER_CHAIN = {
     }
 }
 
-COTRACTS_PER_CHAIN = {
+CONTRACTS_PER_CHAIN = {
     'Berachain': {
         'BULLAS':{
             'Multicall'          : '0x2972e38A38956148AA93801A8A78459020a34523',

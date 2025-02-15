@@ -10,12 +10,12 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
 
-from utils.networks import HyperTestnetRPC
+from utils.networks import BerachainRPC
 from utils.multicall3 import Multicall3
 from modules import Client
 from dev import GeneralSettings
 from config import (
-    TOKENS_PER_CHAIN, ACCOUNTS_DATA,
+    TOKENS_PER_CHAIN, NFTS_PER_CHAIN, ACCOUNTS_DATA,
     MULTICALL3_CONTRACTS, MULTICALL3_ABI
 )
 
@@ -86,7 +86,7 @@ class MulticallTxChecker:
             accounts_data.append({
                 'account_name': account[0],
                 'evm_private_key': account[1],
-                'network': HyperTestnetRPC,
+                'network': BerachainRPC,
                 'proxy': proxy
             })
         return accounts_data
@@ -141,17 +141,17 @@ class MulticallTxChecker:
             # getEthBalance
             calls.append('getEthBalance')
             calls.append(
-                client.get_contract(MULTICALL3_CONTRACTS['HyperTestnet'], MULTICALL3_ABI).functions.getEthBalance(address)
+                client.get_contract(MULTICALL3_CONTRACTS['Berachain'], MULTICALL3_ABI).functions.getEthBalance(address)
             )
             calls_info.append({
                 'wallet_index': wallet_index,
-                'column_name': 'HYPE',
+                'column_name': 'BERA',
                 'decimals': 18
             })
 
             # Token balances
-            for token_name, token_address in TOKENS_PER_CHAIN['HyperTestnet'].items():
-                if token_name != 'HYPE':
+            for token_name, token_address in TOKENS_PER_CHAIN['Berachain'].items():
+                if token_name != 'BERA':
                     balance_call = client.get_contract(token_address).functions.balanceOf(address)
                     decimals_call = client.get_contract(token_address).functions.decimals()
                     calls.append(balance_call)
@@ -163,14 +163,14 @@ class MulticallTxChecker:
                     })
             
             # NFT balances
-            # for nft_name, nft_address in NFTS_PER_CHAIN['HyperTestnet'].items():
-            #     balance_call = client.get_contract(nft_address).functions.balanceOf(address)
-            #     calls.append(balance_call)
-            #     calls_info.append({
-            #         'wallet_index': wallet_index,
-            #         'column_name': nft_name,
-            #         'decimals': 0,
-            #     })
+            for nft_name, nft_address in NFTS_PER_CHAIN['Berachain'].items():
+                balance_call = client.get_contract(nft_address).functions.balanceOf(address)
+                calls.append(balance_call)
+                calls_info.append({
+                    'wallet_index': wallet_index,
+                    'column_name': nft_name,
+                    'decimals': 0,
+                })
 
             # # Additional contract calls
             # contracts_calls = {
@@ -255,7 +255,7 @@ class MulticallTxChecker:
 
     async def perform_multicall(self, w3, calls):
         """Run multicall and return raw results or None."""
-        multicall = Multicall3(w3=w3, multicall_address=MULTICALL3_CONTRACTS['HyperTestnet'])
+        multicall = Multicall3(w3=w3, multicall_address=MULTICALL3_CONTRACTS['Berachain'])
         try:
             raw_results = await multicall.aggregate3(*calls)
             return raw_results
