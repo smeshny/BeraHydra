@@ -49,11 +49,12 @@ TOTAL_DECIMALS = 18  # количество знаков после запято
 # https://game.bullas.xyz/
 
 #ROUTES MODULES:
-    # ['purchase_upgrade_for_moola:Berachain'],   
+    # ['bullas_purchase_upgrade_for_moola'],   
     
 #######################################################################################################################
 
 
 CLASSIC_ROUTES_MODULES_USING = [
-    ['purchase_upgrade_for_moola:Berachain'],   
+    # ['bullas_purchase_upgrade_for_moola'],   
+    ['bullas_claim_free_gamepass_for_main_bullas_nft'],
 ]

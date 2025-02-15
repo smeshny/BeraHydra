@@ -17,6 +17,8 @@ AVAILABLE_MODULES_INFO = {
     bridge_relay                        : (bridge_relay, 2, 'Bridge Relay', 0, [0]),
     unwrap_native                       : (unwrap_native, 2, 'Unwrap Native', 0, [0]),
     transfer_eth                        : (transfer_eth, 3, 'Transfer $ETH', 0, [0]),
+    bullas_purchase_upgrade_for_moola   : (bullas_purchase_upgrade_for_moola, 3, 'Bullas Purchase Upgrade for Moola', 0, [0]),
+    bullas_claim_free_gamepass_for_main_bullas_nft : (bullas_claim_free_gamepass_for_main_bullas_nft, 3, 'Bullas Claim Free Gamepass for Main Bullas NFT', 0, [0]),
 }
 
 
@@ -37,7 +39,7 @@ class RouteGenerator(Logger):
     def classic_generate_route():
         route = []
         copy_full_route = copy.deepcopy(Settings.CLASSIC_ROUTES_MODULES_USING)
-        rpc = 'Ethereum'
+        rpc = 'Berachain'
         flag = any(isinstance(sub_route, tuple) for sub_route in copy_full_route)
 
         if flag:
@@ -91,7 +93,7 @@ class RouteGenerator(Logger):
                         route.append(f"{module.__name__}:{rpc}")
                     else:
                         raise SoftwareException(f'Нет модуля с именем "{module_name}" в софте.')
-            rpc = "Ethereum"
+            rpc = "Berachain"
 
         return route
 

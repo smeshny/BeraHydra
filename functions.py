@@ -8,7 +8,7 @@ def get_client(module_input_data) -> Client:
 
 def get_rpc_by_chain_name(chain_name):
     return {
-        0: BeraChainRPC,
+        0: BerachainRPC,
         "Arbitrum": ArbitrumRPC,
         "Arbitrum Nova": Arbitrum_novaRPC,
         "Base": BaseRPC,
@@ -23,8 +23,7 @@ def get_rpc_by_chain_name(chain_name):
         "Ethereum": EthereumRPC,
         "Avalanche": AvalancheRPC,
         "BNB Chain": BSC_RPC,
-        "BeraChain": BeraChainRPC,
-        "HyperTestnet": HyperTestnetRPC
+        "Berachain": BerachainRPC,
     }[chain_name]
 
 
@@ -62,62 +61,10 @@ async def transfer_eth(module_input_data):
     worker = Custom(Client(module_input_data))
     return await worker.transfer_eth()
 
-async def claim_tokens_on_hypurr(module_input_data):
-    worker = HupurrFaucet(get_client(module_input_data))
-    return await worker.claim_tokens_on_hypurr()
+async def bullas_purchase_upgrade_for_moola(module_input_data):
+    worker = Bullas(get_client(module_input_data))
+    return await worker.purchase_upgrade_for_moola()
 
-async def claim_hype_on_hyperlend_once(module_input_data):
-    worker = HyperlendFaucet(get_client(module_input_data))
-    return await worker.claim_hype_on_hyperlend_once()
-
-async def claim_MBTC_on_hyperlend_once(module_input_data):
-    worker = HyperlendFaucet(get_client(module_input_data))
-    return await worker.claim_MBTC_on_hyperlend_once()
-
-async def deposit_usdc_to_hypurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.deposit_usdc_to_hypurr()
-
-async def deposit_susde_to_hypurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.deposit_susde_to_hypurr()
-
-async def deposit_solvbtc_to_hypurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.deposit_solvbtc_to_hypurr()
-
-async def borrow_usdc_from_hupurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.borrow_usdc_from_hupurr()
-
-async def borrow_usdxl_from_hupurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.borrow_usdxl_from_hupurr()
-
-async def borrow_whype_from_hupurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.borrow_whype_from_hupurr()
-
-async def borrow_susde_from_hupurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.borrow_susde_from_hupurr()
-
-async def borrow_solvbtc_from_hupurr(module_input_data):
-    worker = HupurrFi(get_client(module_input_data))
-    return await worker.borrow_solvbtc_from_hupurr()
-
-async def claim_usdc_from_hl_exchange_testnet_once(module_input_data):
-    worker = HlExchangeTestnet(get_client(module_input_data))
-    return await worker.claim_usdc_from_hl_exchange_testnet_once()
-
-async def open_random_perp_position_on_hl(module_input_data):
-    worker = HlExchangeTestnet(get_client(module_input_data))
-    return await worker.open_random_perp_position()
-
-async def close_all_perp_positions_on_hl(module_input_data):
-    worker = HlExchangeTestnet(get_client(module_input_data))
-    return await worker.close_all_perp_positions()
-
-async def close_random_perp_position_on_hl(module_input_data):
-    worker = HlExchangeTestnet(get_client(module_input_data))
-    return await worker.close_random_perp_position()
+async def bullas_claim_free_gamepass_for_main_bullas_nft(module_input_data):
+    worker = Bullas(get_client(module_input_data))
+    return await worker.claim_free_gamepass_for_main_bullas_nft()

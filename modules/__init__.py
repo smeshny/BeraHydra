@@ -3,3 +3,4 @@ from .client import Client
 from .custom_modules import Custom
 from .binance import Binance
 from .relay import Relay
+from .games import Bullas
