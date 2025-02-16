@@ -5,6 +5,7 @@ import random
 import telebot
 import asyncio
 import traceback
+from datetime import datetime, timedelta
 
 from config import ACCOUNTS_DATA
 from modules import Logger
@@ -356,9 +357,11 @@ class Runner(Logger):
             RouteGenerator().classic_routes_json_save()
 
             sleep_time = random.randint(*GeneralSettings.SLEEP_TIME_FOR_NEW_RUN)
+            future_time = datetime.now() + timedelta(seconds=sleep_time)
 
             self.logger_msg(
                 None, None,
-                msg=f"INFINITY_MODE = True, will start all accounts again after {sleep_time / 60:.2f} minutes\n"
+                msg=f"INFINITY_MODE = True, will start all accounts again after {sleep_time / 60:.2f} minutes "
+                    f"(at {future_time.strftime('%H:%M:%S')})\n"
             )
             await asyncio.sleep(sleep_time)
