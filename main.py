@@ -87,7 +87,8 @@ def main():
     try:
         cprint(TITLE, color='blue')
         cprint(f'⚙️ v{VERSION}\n', attrs=["bold"])
-        cprint(f'Based on open source project: https://github.com/realaskaer/AstrumClaimer\n', 'light_blue', attrs=["bold"])
+        cprint(f'Join tg chat: https://t.me/MimbleWimbleLAB_chat\n\n', 'light_blue', attrs=["bold"])
+        cprint(f'🚨 Based on open source project: https://github.com/realaskaer/AstrumClaimer\n', 'light_blue', attrs=["bold"])
 
         while True:
             answer = select(
