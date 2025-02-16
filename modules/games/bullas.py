@@ -151,7 +151,7 @@ class Bullas(Logger, RequestClient):
             tool_quantity = await self.factory_contract.functions.tokenId_toolId_Amount(gamepass_id, tool_id).call()
             tools_stats[tool_id] = tool_quantity
             
-            if tool_quantity < random.randint(1, 3):
+            if tool_quantity < random.randint(1, 1):
                 try:
                     tool_amount = random.randint(1, 1)
                     self.logger_msg(*self.client.acc_info,
@@ -172,10 +172,36 @@ class Bullas(Logger, RequestClient):
                             msg=f'Not enough MOOLA to purchase Tool ID: {tool_id}',
                             type_msg='warning'
                             )
+                        last_tool_id = tool_id
                         break
                     else:
                         raise SoftwareException(f"Error purchasing tool: {error}")
-        
+                    
+        for tool_id in range(last_tool_id, -1, -1):
+            while True:
+                tool_amount = random.randint(1, 2)
+                self.logger_msg(*self.client.acc_info,
+                    msg=f'Start purchase {tool_amount} tools for Tool ID: {tool_id}. Tools quantity before: {tools_stats[tool_id]}'
+                    )
+                try:
+                    transaction = await self.factory_contract.functions.purchaseTool(
+                        gamepass_id,
+                        tool_id,
+                        tool_amount,
+                        ).build_transaction(await self.client.prepare_transaction())
+                    await self.client.send_transaction(transaction)
+                    tools_stats[tool_id] = tools_stats[tool_id] + tool_amount
+                    purchases += 1
+                except Exception as error:
+                    if 'burn amount exceeds balance' in str(error):
+                        self.logger_msg(*self.client.acc_info,
+                            msg=f'Not enough MOOLA to purchase Tool ID: {tool_id}',
+                            type_msg='warning'
+                            )
+                        break
+                    else:
+                        raise SoftwareException(f"Error purchasing tool: {error}")
+
         if purchases == 0:
             self.logger_msg(*self.client.acc_info,
                     msg=f'Start claim MOOLA for game pass {gamepass_id} because nothig purchased',
