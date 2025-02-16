@@ -1,64 +1,67 @@
 """
 ------------------------------------------------GENERAL SETTINGS--------------------------------------------------------
-    WALLETS_TO_WORK = 0 | Софт будет брать кошельки из таблице по правилам, описанным снизу
-    0       = все кошельки подряд
-    3       = только кошелек №3
-    4, 20   = кошелек №4 и №20
-    [[5, 25]] = кошельки с №5 по №25
-    [[5, 25], [30, 35]] = кошельки с №5 по №25 и с №30 по №30
+    WALLETS_TO_WORK = 0 | The software will select wallets from the table according to the rules described below
+    0       = all wallets in sequence
+    3       = only wallet #3
+    4, 20   = wallet #4 and #20
+    [[5, 25]] = wallets from #5 to #25
+    [[5, 25], [30, 35]] = wallets from #5 to #25 and from #30 to #35
 
-    WALLETS_TO_EXCLUDE = 0 | Софт будет исключать кошельки из таблицы по правилам, описанным снизу
-    0       = никакой кошелек не будет убран
-    3       = только кошелек №3
-    4, 20   = кошелек №4 и №20
-    [5, 25] = кошельки с №5 по №25
-    [[5, 25], [30, 35]] = кошельки с №5 по №25 и с №30 по №30
+    WALLETS_TO_EXCLUDE = 0 | The software will exclude wallets from the table according to the rules described below
+    0       = no wallets will be excluded
+    3       = only wallet #3
+    4, 20   = wallet #4 and #20
+    [5, 25] = wallets from #5 to #25
+    [[5, 25], [30, 35]] = wallets from #5 to #25 and from #30 to #35
 
-    ACCOUNTS_IN_STREAM      | Количество кошельков в потоке на выполнение. Если всего 100 кошельков, а указать 10,
-                                то софт сделает 10 подходов по 10 кошельков
+    ACCOUNTS_IN_STREAM      | Number of wallets in the execution stream. If there are 100 wallets total and you set 10,
+                             the software will make 10 runs with 10 wallets each
 
-    EXCEL_PASSWORD          | Включает запрос пароля при входе в софт. Сначала установите пароль в таблице
-    EXCEL_PAGE_NAME         | Название листа в таблице. Пример: 'BeraChain'
+    EXCEL_PASSWORD          | Enables password request when entering the software. First set the password in the table
+    EXCEL_PAGE_NAME         | Sheet name in the table. Example: 'BeraChain'
 
 """
 
-SOFTWARE_MODE = 1               # 0 - последовательный запуск / 1 - параллельный запуск
-ACCOUNTS_IN_STREAM = 3         # Количество аккаунтов в потоке при SOFTWARE_MODE = 1
-WALLETS_TO_WORK = 3             # 0 / 3 / 3, 20 / [[3, 20]]
-WALLETS_TO_EXCLUDE = 0          # 0 / 3 / 3, 20 / [[3, 20]]
-SHUFFLE_WALLETS = True         # Перемешивает кошельки перед запуском
+SOFTWARE_MODE = 0              # 0 - sequential execution / 1 - parallel execution
+ACCOUNTS_IN_STREAM = 1         # Number of accounts per stream when SOFTWARE_MODE = 1
+WALLETS_TO_WORK = 0            # 0 / 3 / 3, 20 / [[3, 20]]
+WALLETS_TO_EXCLUDE = 0         # 0 / 3 / 3, 20 / [[3, 20]]
+SHUFFLE_WALLETS = True         # Shuffles wallets before execution
 
-BREAK_ROUTE = False              # Прекращает выполнение маршрута, если произойдет ошибка
-SAVE_PROGRESS = True            # Включает сохранение прогресса аккаунта для Classic-routes
-TELEGRAM_NOTIFICATIONS = False  # Включает уведомления в Telegram
+BREAK_ROUTE = False            # Stops route execution if an error occurs
+SAVE_PROGRESS = True           # Enables account progress saving for Classic-routes
+TELEGRAM_NOTIFICATIONS = True  # Enables Telegram notifications
 
 '------------------------------------------------SLEEP CONTROL---------------------------------------------------------'
 
-SLEEP_MODE = True               # Включает сон после каждого модуля и аккаунта
-SLEEP_TIME_MODULES = (10, 25)   # (минимум, максимум) секунд | Время сна между модулями.
-SLEEP_TIME_ACCOUNTS = (25, 85)  # (минимум, максимум) секунд | Время сна между аккаунтами.
+SLEEP_MODE = True              # Enables sleep after each module and account
+SLEEP_TIME_MODULES = (10, 25)  # (minimum, maximum) seconds | Sleep time between modules
+SLEEP_TIME_ACCOUNTS = (150, 210) # (minimum, maximum) seconds | Sleep time between accounts
+
+INFINITY_MODE = True           # Restarts accounts in a new cycle. Allows to loop the entire work process
+SLEEP_TIME_FOR_NEW_RUN = (60 * 60 * 3, 60 * 60 * 7)  # (minimum, maximum) seconds | Sleep time between repeated runs
 
 '------------------------------------------------RETRY CONTROL---------------------------------------------------------'
-MAXIMUM_RETRY = 5               # Количество повторений при ошибках
-SLEEP_TIME_RETRY = (5, 15)       # (минимум, максимум) секунд | Время сна после очередного повторения
+MAXIMUM_RETRY = 5              # Number of retries on errors
+SLEEP_TIME_RETRY = (5, 15)     # (minimum, maximum) seconds | Sleep time after each retry
 
 '-----------------------------------------------------GAS CONTROL------------------------------------------------------'
 
-GAS_CONTROL = False              # Включает контроль газа
-MAXIMUM_GWEI = 10               # Максимальный GWEI для работы софта, изменять во время работы софта в maximum_gwei.json
-SLEEP_TIME_GAS = 100            # Время очередной проверки газа
-CONTROL_TIMES_FOR_SLEEP = 5     # Количество проверок
-GAS_LIMIT_MULTIPLIER = 1.3      # Множитель газ лимита для транзакций. Поможет сэкономить на транзакциях
-GAS_PRICE_MULTIPLIER = 5.5      # Множитель цены газа для транзакций. Ускоряет выполнение или уменьшает цену транзакции
-UNLIMITED_APPROVE = True        # Включает бесконечное одобрение токенов
+GAS_CONTROL = False            # Enables gas control
+MAXIMUM_GWEI = 10              # Maximum GWEI for software operation, can be changed during runtime in maximum_gwei.json
+SLEEP_TIME_GAS = 100           # Time between gas checks
+CONTROL_TIMES_FOR_SLEEP = 5    # Number of checks
+GAS_LIMIT_MULTIPLIER = 1.3     # Gas limit multiplier for transactions. Helps save on transaction costs
+GAS_PRICE_MULTIPLIER = 1.5     # Gas price multiplier for transactions. Speeds up execution or reduces transaction cost
+UNLIMITED_APPROVE = True       # Enables unlimited token approvals
 
 '------------------------------------------------PROXY CONTROL---------------------------------------------------------'
-PROXY_REPLACEMENT_COUNT = 20     # Количество возможных замен прокси во время работы, после аккаунт прекратит выполнение
-USE_PROXY = True                 # Включает использование прокси
+PROXY_REPLACEMENT_COUNT = 20    # Number of possible proxy replacements during operation, after which the account stops
+USE_PROXY = True               # Enables proxy usage
 
 '------------------------------------------------SECURE DATA-----------------------------------------------------------'
 
-CAPTCHA_SOLVER = '2captcha'      # Сервис, через который будет решаться капча (2captcha или capmonster)
+CAPTCHA_SOLVER = '2captcha'     # Service used for solving captchas (2captcha or capmonster)
 # https://2captcha.com/enterpage
 TWO_CAPTCHA_API_KEY = ""
 
@@ -69,7 +72,7 @@ BINANCE_API_SECRET = ""
 # EXCEL INFO
 EXCEL_PASSWORD = False
 EXCEL_PAGE_NAME = "EVM"
-EXCEL_FILE_PATH = "./data/accounts_data.xlsx"  # Можете не изменять, если устраивает дефолтное расположение таблицы
+EXCEL_FILE_PATH = "./data/accounts_data.xlsx"  # You can keep the default table location if it suits you
 
 # TELEGRAM DATA
 TG_TOKEN = ""  # https://t.me/BotFather
