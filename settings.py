@@ -1,9 +1,9 @@
-"""---------------------------------------–––––––––MODULES SETTINGS-–––----------------------------------------------"""
+"""------------------------------------––––––ORIGINAL ASTRUM CLAIMER CONTROLS-–––-----------------------------------"""
 
 """
--------------------------------------------------------CEX CONTROL------------------------------------------------------
-    Выберите сети/суммы для вывода и ввода с CEX. Не забудьте вставить API ключи в general_settings.py.
-    Депозиты и выводы работают только со спотовым балансом на бирже.
+-------------------------------------------------------CEX CONTROL-----------------------------------------------------
+    Select networks/amounts for withdrawals and deposits from CEX. Don't forget to insert API keys in general_settings.py.
+    Deposits and withdrawals only work with spot balance on the exchange.
 
     1 - ETH-ERC20                          
     2 - ETH-Arbitrum One                           
@@ -12,50 +12,54 @@
     5 - ETH-Linea              
     6 - ETH-Base               
 
-    ⚠️ Софт сам отнимает комиссию от суммы депозита, при работе с нативными токенами ⚠️
+    ⚠️ The software automatically deducts the commission from the deposit amount when working with native tokens ⚠️
 
-    Сумма в количестве  - (0.01, 0.02)
-    Сумма в процентах   - ("10", "20") ⚠️ Значения в кавычках.
+    Amount in quantity  - (0.01, 0.02)
+    Amount in percent   - ("10", "20") ⚠️ Values in quotes.
 
-    OKX_WITHDRAW_DATA | Каждый список - один модуль для вывода из биржи. Примеры работы указаны ниже:
-                        Для каждого вывода указывайте [сеть вывода, (мин и макс сумма)]
+    OKX_WITHDRAW_DATA | Each list is one module for withdrawal from the exchange. Usage examples are shown below:
+                        For each withdrawal, specify [withdrawal network, (min and max amount)]
 
-    Примеры рандомизации вывода с биржи:
+    Examples of randomizing exchange withdrawals:
 
-    [[17, (1, 1.011)], None] | Пример установки None, для случайного выбора (выполнение действия или его пропуск)
-    [[2, (0.48, 0.5)], [3, (0.48, 0.5)]] | Пример установки двух сетей, софт выберет одну случайную.
+    [[17, (1, 1.011)], None] | Example of setting None for random choice (executing action or skipping it)
+    [[2, (0.48, 0.5)], [3, (0.48, 0.5)]] | Example of setting two networks, software will choose one randomly.
     
-    Настройка лимитера. Указывать в ETH
-    лимитерX - это минимальный баланс на аккаунте, чтобы софт начал процесс бриджа
-    лимитерY - это мин. и макс. сумма, которая должна остаться на балансе для комиссии.
+    Limiter configuration. Specify in ETH
+    limiterX - minimum balance in the account for the software to start the bridge process
+    limiterY - min. and max. amount that should remain in balance for commission.
 """
 
 BINANCE_WITHDRAW_DATA = [
     [[2, (0.006, 0.007)], [3, (0.006, 0.007)], [6, (0.006, 0.007)]]
 ]
 
-RELAY_CHAIN_FROM_NAMES = ['Arbitrum', 'Optimism', 'Base']  # исходящие сети для бриджа
-RELAY_CHAIN_TO_NAMES = ['Ethereum']    # входящие сетя для бриджа
-RELAY_BRIDGE_AMOUNT = ['100', '100']   # сумма для бриджа, в кавычках - %, без них - четкая сумма. Пример в CEX CONTROL
-RELAY_TOKEN_NAME = 'ETH'               # токен для бриджа
-RELAY_AMOUNT_LIMITER = 0, (0.00005, 0.00007)  # лимитер для бриджа. Описание в CEX CONTROL
+RELAY_CHAIN_FROM_NAMES = ['Arbitrum', 'Optimism', 'Base']  # source networks for bridging
+RELAY_CHAIN_TO_NAMES = ['Ethereum']    # destination networks for bridging
+RELAY_BRIDGE_AMOUNT = ['100', '100']   # bridge amount, in quotes - %, without quotes - exact amount. Example in CEX CONTROL
+RELAY_TOKEN_NAME = 'ETH'               # token for bridging
+RELAY_AMOUNT_LIMITER = 0, (0.00005, 0.00007)  # bridge limiter. Description in CEX CONTROL
 
-TRANSFER_ETH_AMOUNT = ['100', '100']  # сумма трансфера ETH на кошелек "Transfer address"
+TRANSFER_ETH_AMOUNT = ['100', '100']  # ETH transfer amount to "Transfer address" wallet
 
-TOTAL_DECIMALS = 18  # количество знаков после запятой для всех транзакций
+TOTAL_DECIMALS = 18  # number of decimal places for all transactions
 
+"""---------------------------------------–––––––––MODULES SETTINGS-–––---------------------------------------------"""
 
 #####################################################  BULLAS #######################################################
 # https://game.bullas.xyz/
 
 #ROUTES MODULES:
-    # ['bullas_purchase_upgrade_for_moola'],   
+    # ['bullas_purchase_upgrade_for_moola'],
+    
+    # ['bullas_claim_free_gamepass_for_main_bullas_nft'],
+    # ['bullas_make_first_click_only_once_for_start_mining_moola'],  
     
 #######################################################################################################################
 
 
 CLASSIC_ROUTES_MODULES_USING = [
-    ['bullas_purchase_upgrade_for_moola'],   
     # ['bullas_claim_free_gamepass_for_main_bullas_nft'],
     # ['bullas_make_first_click_only_once_for_start_mining_moola'],
+    ['bullas_purchase_upgrade_for_moola'],  
 ]

@@ -151,7 +151,7 @@ class Bullas(Logger, RequestClient):
             tool_quantity = await self.factory_contract.functions.tokenId_toolId_Amount(gamepass_id, tool_id).call()
             tools_stats[tool_id] = tool_quantity
             
-            if tool_quantity < random.randint(1, 1):
+            if tool_quantity < random.randint(1, 3):
                 try:
                     tool_amount = random.randint(1, 1)
                     self.logger_msg(*self.client.acc_info,

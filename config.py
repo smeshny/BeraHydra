@@ -59,6 +59,8 @@ TOKENS_PER_CHAIN = {
         # 'iBERA'                  : '0x9b6761bf2397Bb5a6624a856cC84A3A14Dcd3fe5',
         # 'iBGT'                   : '0xac03CABA51e17c86c921E1f6CBFBdC91F8BB2E6b',
         'MOOLA'                  : '0x331865bF2eA19E94bBF438Cf4ee590cB6392E5A9',
+        'oBERO'                  : '0x40A8d9efE6A2C6C9D193Cc0A4476767748E68133',
+        
         
     }
 
