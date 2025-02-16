@@ -268,7 +268,8 @@ class MulticallTxChecker:
         for i in range(len(clients)):
             wallets_data.append({
                 '#': batch_start_index + i + 1,  # Adjust the wallet number based on the batch start index
-                'Account Name': accounts_data[i]['account_name']
+                'Account Name': accounts_data[i]['account_name'],
+                'Address': clients[i].address
             })
 
         current_result_idx = 0
