@@ -96,7 +96,7 @@ class Logger(ABC):
                 module_info = "0/0"
 
         if account_name is None and address is None:
-            info = f'[HyperHydra] | {software_chain} | {class_name} |'
+            info = f'[BeraHydra] | {software_chain} | {class_name} |'
         elif account_name is not None and address is None:
             info = f'[{acc_info}] | [{account_name}] | [{module_info}] | v{VERSION} | {software_chain} | {class_name} |'
         else:
