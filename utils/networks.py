@@ -32,6 +32,17 @@ BerachainRPC = Network(
     explorer='https://berascan.com/'
 )
 
+BlockchainLOLRPC = Network(
+    name='BlockchainLOL',
+    rpc=[
+        'https://block-chain.alt.technology'
+    ],
+    chain_id=6231991,
+    eip1559_support=True,
+    token='BITCOIN',
+    explorer='https://explorer.block-chain.lol/'
+)
+
 EthereumRPC = Network(
     name='Ethereum',
     rpc=[

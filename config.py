@@ -30,6 +30,7 @@ ETH_MASK = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 MULTICALL3_CONTRACTS = {
     'Arbitrum'                   : '0xcA11bde05977b3631167028862bE2a173976CA11',
     'Berachain'                  : '0xcA11bde05977b3631167028862bE2a173976CA11',
+    'BlockchainLOL'              : '0xAe17b2286cBf7211668183C5CBBdc38F932E6692',
 }
 
 TOKENS_PER_CHAIN = {
@@ -60,10 +61,15 @@ TOKENS_PER_CHAIN = {
         # 'iBGT'                   : '0xac03CABA51e17c86c921E1f6CBFBdC91F8BB2E6b',
         'MOOLA'                  : '0x331865bF2eA19E94bBF438Cf4ee590cB6392E5A9',
         'oBERO'                  : '0x40A8d9efE6A2C6C9D193Cc0A4476767748E68133',
-        
-        
+    },
+    'BlockchainLOL': {
+        'BITCOIN'                : '0xB81888b51F6BBCA93e09c7f1C699aF04a14Daed7',
+        'WBITCOIN'               : '0xB81888b51F6BBCA93e09c7f1C699aF04a14Daed7',
+        'BERA'                   : '0x01ABb03e79c5E090d9621fCea2A93770aaB88D53',
+        'WBERA'                  : '0xeda89b957E6cC0f15aB27307A386370814629FEe',
+        'HONEY'                  : '0x843797d0A118F960EC5A3396b93c25918d82a5f1',
+        'WETH'                   : '0x1E9cc7764D7974D2F15f6B4AD3DD1f2e47892fBF',
     }
-
 }
 
 NFTS_PER_CHAIN = {
@@ -75,13 +81,21 @@ NFTS_PER_CHAIN = {
 
 CONTRACTS_PER_CHAIN = {
     'Berachain': {
-        'BULLAS':{
+        'BULLAS': {
             'Multicall'          : '0x2972e38A38956148AA93801A8A78459020a34523',
             'Factory'            : '0x8d15Db9CeE68beF3beb65c576180e6D83F5c431D',
             'Bullish'            : '0xe1d8215F710Da00d9918ebB649DDF1928Ad55896',
             'QueuePlugin'        : '0xE259A689D13139F413eE693BE27181192319a629',
-            }                   
-    }
+            },
+    },
+    'BlockchainLOL': {
+        'BlockSwap': {
+            'QuoterV2'           : '0x2df24142f7B3961A1961d92C4AB932874225E718',
+            'SwapRouter02'       : '0x5fB236754f88EC08B419d45B007d3a33C3E1262B',
+            'UniswapV3Factory'   : '0x91ce27841FeE74A9C001846f4adF2Fe55479FFFC',
+            'UniswapV2Factory'   : '0x22154a1D6f556c657716b082b873D5452857E2E9',
+            },
+    },
 }
 
 TOKEN_API_INFO = {
