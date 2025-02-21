@@ -61,9 +61,13 @@ async def transfer_eth(module_input_data):
     worker = Custom(Client(module_input_data))
     return await worker.transfer_eth()
 
-async def bullas_purchase_upgrade_for_moola(module_input_data):
+async def bullas_purchase_tools_for_moola(module_input_data):
     worker = Bullas(get_client(module_input_data))
-    return await worker.purchase_upgrade_for_moola()
+    return await worker.purchase_tools_for_moola()
+
+async def bullas_upgrade_tools_for_moola(module_input_data):
+    worker = Bullas(get_client(module_input_data))
+    return await worker.upgrade_tools_for_moola()
 
 async def bullas_claim_free_gamepass_for_main_bullas_nft(module_input_data):
     worker = Bullas(get_client(module_input_data))

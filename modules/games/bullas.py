@@ -139,7 +139,7 @@ class Bullas(Logger, RequestClient):
         return await self._make_click(game_pass_id)
 
     @helper
-    async def purchase_upgrade_for_moola(self):
+    async def purchase_tools_for_moola(self):
         gamepass_id = await self.get_game_pass_id()        
         gamepass_power = await self.get_power_of_nft_id(gamepass_id)
         
@@ -151,7 +151,7 @@ class Bullas(Logger, RequestClient):
             tool_quantity = await self.factory_contract.functions.tokenId_toolId_Amount(gamepass_id, tool_id).call()
             tools_stats[tool_id] = tool_quantity
             
-            if tool_quantity < random.randint(1, 1):
+            if tool_quantity < random.randint(1, 1) or tool_id == 19:
                 try:
                     tool_amount = random.randint(1, 1)
                     self.logger_msg(*self.client.acc_info,
@@ -177,30 +177,30 @@ class Bullas(Logger, RequestClient):
                     else:
                         raise SoftwareException(f"Error purchasing tool: {error}")
                     
-        for tool_id in range(last_tool_id, -1, -1):
-            while True:
-                tool_amount = random.randint(1, 2)
-                self.logger_msg(*self.client.acc_info,
-                    msg=f'Start purchase {tool_amount} tools for Tool ID: {tool_id}. Tools quantity before: {tools_stats[tool_id]}'
-                    )
-                try:
-                    transaction = await self.factory_contract.functions.purchaseTool(
-                        gamepass_id,
-                        tool_id,
-                        tool_amount,
-                        ).build_transaction(await self.client.prepare_transaction())
-                    await self.client.send_transaction(transaction)
-                    tools_stats[tool_id] = tools_stats[tool_id] + tool_amount
-                    purchases += 1
-                except Exception as error:
-                    if 'burn amount exceeds balance' in str(error):
-                        self.logger_msg(*self.client.acc_info,
-                            msg=f'Not enough MOOLA to purchase Tool ID: {tool_id}',
-                            type_msg='warning'
-                            )
-                        break
-                    else:
-                        raise SoftwareException(f"Error purchasing tool: {error}")
+        # for tool_id in range(last_tool_id, -1, -1):
+        #     while True:
+        #         tool_amount = random.randint(1, 2)
+        #         self.logger_msg(*self.client.acc_info,
+        #             msg=f'Start purchase {tool_amount} tools for Tool ID: {tool_id}. Tools quantity before: {tools_stats[tool_id]}'
+        #             )
+        #         try:
+        #             transaction = await self.factory_contract.functions.purchaseTool(
+        #                 gamepass_id,
+        #                 tool_id,
+        #                 tool_amount,
+        #                 ).build_transaction(await self.client.prepare_transaction())
+        #             await self.client.send_transaction(transaction)
+        #             tools_stats[tool_id] = tools_stats[tool_id] + tool_amount
+        #             purchases += 1
+        #         except Exception as error:
+        #             if 'burn amount exceeds balance' in str(error):
+        #                 self.logger_msg(*self.client.acc_info,
+        #                     msg=f'Not enough MOOLA to purchase Tool ID: {tool_id}',
+        #                     type_msg='warning'
+        #                     )
+        #                 break
+        #             else:
+        #                 raise SoftwareException(f"Error purchasing tool: {error}")
 
         if purchases == 0:
             self.logger_msg(*self.client.acc_info,
@@ -224,4 +224,38 @@ class Bullas(Logger, RequestClient):
                 type_msg='info'
                 )
         
+        return True
+
+    @helper
+    async def upgrade_tools_for_moola(self):
+        gamepass_id = await self.get_game_pass_id()        
+        
+        tool_ids = list(range(20))
+        purchases = 0
+        
+        for tool_id in tool_ids:
+            while True:
+                try:    
+                    transaction = await self.factory_contract.functions.upgradeTool(
+                        gamepass_id,
+                        tool_id,
+                        ).build_transaction(await self.client.prepare_transaction())
+                    await self.client.send_transaction(transaction)
+                    purchases += 1
+                except Exception as error:
+                    break
+                
+        if purchases == 0:
+            self.logger_msg(*self.client.acc_info,
+                    msg=f'Start claim MOOLA for game pass {gamepass_id} because nothig purchased',
+                    type_msg='info'
+                    )
+            try:
+                transaction = await self.factory_contract.functions.claim(
+                    gamepass_id,
+                    ).build_transaction(await self.client.prepare_transaction())
+                await self.client.send_transaction(transaction)
+            except Exception as error:
+                raise SoftwareException(f"Error claiming MOOLA: {error}")
+                
         return True
